@@ -16,6 +16,12 @@ class Router {
       $controller = new \App\Controllers\Error404();
     }
 
+	if (isset($controller::$authorization)) {
+		if (!$controller->authorize()) {
+			return;
+		}
+	}
+
     $methodName = !empty($arr[2]) ? strtolower(str_replace('-', '_', $arr[2])) : 'index';
 
     if (method_exists($controller, $methodName)) {
