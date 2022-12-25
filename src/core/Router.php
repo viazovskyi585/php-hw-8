@@ -1,14 +1,28 @@
 <?php
 namespace Core;
 
-class Router {
+class Router
+{
 
-  public function run() {
-    $url = $_SERVER['REQUEST_URI'];
-    $arr = explode('/', $url);
+  public function run()
+  {
+    $fullUrl = !empty($_SERVER['REDIRECT_URL']) ? $_SERVER['REDIRECT_URL'] : $_SERVER['REQUEST_URI'];
+    $urlArr = explode('?', $fullUrl);
+    $url = $urlArr[0];
 
-    $className = !empty($arr[1]) ? ucfirst($arr[1]) : 'Home';
-    $controllerName = "App\\Controllers\\$className";
+    $config = include __DIR__ . '/../config/common.php';
+
+    $controllerName = '';
+    $controller = null;
+    $methodName = 'index';
+
+    if (!empty($config[$url])) {
+      $configEntry = $config[$url];
+      [$className, $methodName] = explode('@', $configEntry);
+      $controllerName = "App\\Controllers\\$className";
+    } else {
+      $controller = new \App\Controllers\Error404();
+    }
 
     if (class_exists($controllerName)) {
       $controller = new $controllerName();
@@ -16,13 +30,11 @@ class Router {
       $controller = new \App\Controllers\Error404();
     }
 
-	if (isset($controller::$authorization)) {
-		if (!$controller->authorize()) {
-			return;
-		}
-	}
-
-    $methodName = !empty($arr[2]) ? strtolower(str_replace('-', '_', $arr[2])) : 'index';
+    if (isset($controller::$authorization)) {
+      if (!$controller->authorize()) {
+        return;
+      }
+    }
 
     if (method_exists($controller, $methodName)) {
       $controller->$methodName();
