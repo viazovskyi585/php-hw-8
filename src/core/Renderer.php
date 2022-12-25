@@ -15,9 +15,9 @@ class Renderer
 		include __DIR__ . '/../public/views/' . $viewName . '.php';
 		return ob_get_clean();
 	}
-	public static function render(string $viewName, array $data = []): void
+	public static function render(string $viewName, string $title, array $data = []): void
 	{
-		$pageTitle = $data['pageTitle'] ?? 'Title';
+		$pageTitle = $title ?? 'Title';
 		$pageContent = self::renderView($viewName, $data);
 		self::renderLayout($pageTitle, $pageContent);
 	}

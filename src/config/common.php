@@ -8,7 +8,7 @@ return [
 	'/about' => 'About@index',
 	'/about/clients-list' => 'About@clients_list',
 	'/gallery' => 'Gallery@index',
-	'/gallery/photos' => 'Gallery@photos',
+	'/gallery/videos' => 'Gallery@videos',
 	'/admin' => 'Admin@index',
 	'/admin/users' => 'Admin@users',
 	'/admin/error' => 'Admin@error',
