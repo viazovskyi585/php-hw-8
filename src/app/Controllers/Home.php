@@ -1,16 +1,22 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\Dashboard;
+use Core\Renderer;
+
+
 class Home
 {
 	public function index()
 	{
-		echo "<h1>This is a home page<h1>";
+		Renderer::render('social/home', "Home");
 	}
 
 	public function dashboard()
 	{
-		echo "<h1>This is a dashboard</h1>";
+		$model = new Dashboard();
+		$data = $model->index();
+		Renderer::render('social/dashboard', "Dashboard", $data);
 	}
 
 	public function error()

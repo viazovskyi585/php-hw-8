@@ -1,15 +1,22 @@
 <?php
 namespace App\Controllers;
+use App\Models\About as AboutModel;
+use App\Models\Clients;
+use Core\Renderer;
 
 class About
 {
 	public function index()
 	{
-		echo "<h1>This is about page</h1>";
+		$model = new AboutModel();
+		$data = $model->index();
+		Renderer::render("social/about", "About", $data);
 	}
 
 	public function clients_list()
 	{
-		echo "<h1>This is clients list page</h1>";
+		$model = new Clients();
+		$data = $model->index();
+		Renderer::render("social/clients_list", "Clients List", $data);
 	}
 }

@@ -1,5 +1,7 @@
 <?php
 namespace App\Controllers;
+use App\Models\Admin as AdminModel;
+use Core\Renderer;
 
 class Admin
 {
@@ -23,12 +25,16 @@ class Admin
 	}
 	public function index()
 	{
-		echo "<h1>This is admin page</h1>";
+		$model = new AdminModel();
+		$data = $model->index();
+		Renderer::render("admin/admin", "Admin", $data);
 	}
 
 	public function users()
 	{
-		echo "<h1>This is users page</h1>";
+		$model = new AdminModel();
+		$data = $model->users();
+		Renderer::render("admin/users", "Admin", $data);
 	}
 
 	public function error()
