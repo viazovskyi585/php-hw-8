@@ -20,3 +20,21 @@ services:
             - ./src:/src
         working_dir: /src
         command: composer dump-autoload
+
+    db:
+        image: mariadb:latest
+        volumes:
+            - ./db:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: test
+            MYSQL_USER: test
+            MYSQL_PASSWORD: test
+        ports:
+            - "3306:3306"
+        restart: on-failure
+
+    adminer:
+        image: adminer:latest
+        ports:
+            - "8069:8080"
