@@ -1,28 +1,11 @@
 <?php
 namespace App\Models;
 
-class Clients
+class Clients extends RootModel
 {
-	public function index()
+	public function getClients()
 	{
-		return [
-			"clients" => [
-				[
-					"id" => 1,
-					"name" => "Client 1",
-					"website" => "https://client1.com",
-				],
-				[
-					"id" => 2,
-					"name" => "Client 2",
-					"website" => "https://client2.com",
-				],
-				[
-					"id" => 3,
-					"name" => "Client 3",
-					"website" => "https://client3.com",
-				],
-			]
-		];
+		$clients = $this->getDataFromDB("SELECT * FROM clients");
+		return ['clients' => $clients];
 	}
 }

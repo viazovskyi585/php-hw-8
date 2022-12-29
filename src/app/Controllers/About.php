@@ -9,14 +9,14 @@ class About
 	public function index()
 	{
 		$model = new AboutModel();
-		$data = $model->index();
+		$data = $model->getPosts();
 		Renderer::render("social/about", "About", $data);
 	}
 
 	public function clients_list()
 	{
 		$model = new Clients();
-		$data = $model->index();
+		$data = $model->getClients();
 		Renderer::render("social/clients_list", "Clients List", $data);
 	}
 }

@@ -1,11 +1,18 @@
-<form action="/" method="get">
-	<label for="fname">First name:</label>
-	<br>
-	<input type="text" id="fname" name="fname">
-	<br>
-	<label for="lname">Last name:</label>
-	<br>
-	<input type="text" id="lname" name="lname">
-	<br>
-	<input type="submit" value="Submit">
-</form>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<div class="container-fluid">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link active" aria-current="page" href="/">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/about">About</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/gallery">Gallery</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/admin">Admin</a>
+			</li>
+		</ul>
+	</div>
+</nav>

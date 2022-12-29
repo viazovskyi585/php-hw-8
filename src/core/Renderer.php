@@ -8,9 +8,9 @@ class Renderer
 		include __DIR__ . '/../public/views/layout.php';
 	}
 
-	private static function renderView(string $viewName, array $data = []): string
+	private static function renderView(string $viewName, array $pageData = []): string
 	{
-		extract($data);
+		extract($pageData);
 		ob_start();
 		include __DIR__ . '/../public/views/' . $viewName . '.php';
 		return ob_get_clean();
