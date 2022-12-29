@@ -11,6 +11,9 @@ services:
 
     php:
         image: php:fpm-alpine
+        build: 
+            context: ./
+            dockerfile: Dockerfile
         volumes:
             - ./src:/src
 
@@ -22,19 +25,19 @@ services:
         command: composer dump-autoload
 
     db:
-        image: mariadb:latest
-        volumes:
-            - ./db:/var/lib/mysql
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: test
-            MYSQL_USER: test
-            MYSQL_PASSWORD: test
+        image: mysql
+        restart: always
         ports:
             - "3306:3306"
-        restart: on-failure
+        environment:
+            MYSQL_ROOT_PASSWORD: root
 
-    adminer:
-        image: adminer:latest
+    phpmyadmin:
+        image: phpmyadmin
         ports:
-            - "8069:8080"
+            - "8069:80"
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: root
