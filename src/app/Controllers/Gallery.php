@@ -10,14 +10,14 @@ class Gallery
 	public function index()
 	{
 		$model = new GalleryModel();
-		$data = $model->index();
+		$data = $model->getPhotos();
 		Renderer::render('social/gallery', "Gallery", $data);
 	}
 
 	public function videos()
 	{
 		$model = new Videos();
-		$data = $model->index();
+		$data = $model->getVideos();
 		Renderer::render('social/videos', "Videos", $data);
 	}
 }
