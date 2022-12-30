@@ -10,7 +10,7 @@ class Router
     $urlArr = explode('?', $fullUrl);
     $url = $urlArr[0];
 
-    $config = include __DIR__ . '/../config/common.php';
+    $config = include __DIR__ . '/../config/routes.php';
 
     $controllerName = '';
     $controller = null;
