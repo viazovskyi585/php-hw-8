@@ -26,15 +26,16 @@ class Admin
 	public function index()
 	{
 		$model = new AdminModel();
-		$data = $model->index();
+		$data = $model->getUsers();
 		Renderer::render("admin/admin", "Admin", $data);
 	}
 
-	public function users()
+	public function user()
 	{
+		$userId = $_GET['id'];
 		$model = new AdminModel();
-		$data = $model->users();
-		Renderer::render("admin/users", "Admin", $data);
+		$data = $model->getUser($userId);
+		Renderer::render("admin/user", "Admin", $data);
 	}
 
 	public function error()
