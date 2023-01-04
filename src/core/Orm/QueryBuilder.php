@@ -1,5 +1,6 @@
 <?php
 namespace Core\Orm;
+use Exception;
 
 class QueryBuilder
 {
@@ -32,6 +33,10 @@ class QueryBuilder
 
 	protected function getTableName(): string
 	{
+		if (empty($this->tableName)) {
+			throw new Exception("No table name provided");
+		}
+
 		return $this->tableName;
 	}
 
@@ -94,6 +99,10 @@ class QueryBuilder
 
 	protected function getQuery(): string
 	{
+		if (empty($this->query)) {
+			throw new Exception("Query is empty");
+		}
+
 		return $this->query;
 	}
 }
