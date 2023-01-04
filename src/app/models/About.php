@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-class About
+class About extends RootModel
 {
-	public function index()
+	public function getPosts()
 	{
-		return [
-			"content" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit at iure rerum ut perspiciatis corporis ipsam modi minima mollitia eum?"
-		];
+		$posts = $this->getDataFromDB("SELECT * FROM posts");
+		return ['posts' => $posts];
 	}
 }

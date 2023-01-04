@@ -1,35 +1,17 @@
 <?php
 namespace App\Models;
 
-class Admin
+class Admin extends RootModel
 {
-	public function index()
+	public function getUsers()
 	{
-		return [
-			"content" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit at iure rerum ut perspiciatis corporis ipsam modi minima mollitia eum?",
-		];
+		$users = $this->getDataFromDB("SELECT id, email FROM users");
+		return ['users' => $users];
 	}
 
-	public function users()
+	public function getUser(string $id)
 	{
-		return [
-			"users" => [
-				[
-					"id" => 1,
-					"name" => "User 1",
-					"email" => "user1@example.com"
-				],
-				[
-					"id" => 2,
-					"name" => "User 2",
-					"email" => "user2@example.com"
-				],
-				[
-					"id" => 3,
-					"name" => "User 3",
-					"email" => "user3@example.com"
-				],
-			]
-		];
+		$user = $this->getDataFromDB("SELECT * FROM users WHERE id = $id");
+		return ['user' => $user];
 	}
 }
