@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Models;
+use Core\Orm\Select;
 
-class About extends RootModel
+class About
 {
-	public function getPosts()
+	public function getPosts(): array
 	{
-		$posts = $this->getDataFromDB("SELECT * FROM posts");
+		$select = new Select();
+		$select->setTableName("posts");
+		$posts = $select->execute();
 		return ['posts' => $posts];
 	}
 }

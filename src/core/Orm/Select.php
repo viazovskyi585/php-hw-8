@@ -1,41 +1,35 @@
 <?php
 namespace Core\Orm;
+use PDO;
 
-class Select
+class Select extends QueryBuilder
 {
 	private DBConnector $connector;
-	private string $tableName;
-	private array $fields;
 	public function __construct()
 	{
+		parent::__construct();
 		$this->connector = new DBConnector();
+		$this->setOperation("SELECT");
+	}
+
+	private function buildQuery(): void
+	{
+		$query = $this->getOperation();
+		$query .= " ";
+		$query .= $this->getFields();
+		$query .= " FROM ";
+		$query .= $this->getTableName();
+		$query .= $this->getOrderBy();
+		$this->setQuery($query);
 	}
 
 	public function execute(): ?array
 	{
-		$q = $this->buildQuery();
-		return [];
-	}
-
-	private function buildQuery(): string
-	{
-		return "";
-	}
-
-	private function getFieldsString(): string
-	{
-		if (count($this->fields) > 0) {
-			
-		}
-	}
-
-	public function setTableName($name): void
-	{
-		$this->tableName = $name;
-	}
-
-	public function setFields($fields = []): void
-	{
-		$this->fields = $fields;
+		$this->buildQuery();
+		$dbh = $this->connector->connect();
+		$sth = $dbh->prepare($this->getQuery());
+		$sth->execute();
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+		return $result;
 	}
 }

@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Models;
+use Core\Orm\Select;
 
-class Gallery extends RootModel
+class Gallery
 {
 	public function getPhotos()
 	{
-		$photos = $this->getDataFromDB("SELECT * FROM photos");
+		$select = new Select();
+		$select->setTableName("photos");
+		$photos = $select->execute();
 		return ['photos' => $photos];
 	}
 }

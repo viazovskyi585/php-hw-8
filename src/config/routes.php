@@ -10,6 +10,6 @@ return [
 	'/gallery' => 'Gallery@index',
 	'/gallery/videos' => 'Gallery@videos',
 	'/admin' => 'Admin@index',
-	'/admin/users' => 'Admin@users',
+	'/admin/user' => 'Admin@user',
 	'/admin/error' => 'Admin@error',
 ];
