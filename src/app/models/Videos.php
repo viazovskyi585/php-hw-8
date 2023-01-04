@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-class Videos
+class Videos extends RootModel
 {
-	public function index()
+	public function getVideos()
 	{
-		return [
-			"videos" => [
-				"https://www.youtube.com/embed/dQw4w9WgXcQ",
-			]
-		];
+		$videos = $this->getDataFromDB("SELECT * FROM videos");
+		return ['videos' => $videos];
 	}
 }
