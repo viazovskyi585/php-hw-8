@@ -20,6 +20,7 @@ class Select extends QueryBuilder
 		$query .= " FROM ";
 		$query .= $this->getTableName();
 		$query .= $this->getOrderBy();
+		$query .= $this->getWhere();
 		$this->setQuery($query);
 	}
 
@@ -28,6 +29,7 @@ class Select extends QueryBuilder
 		$this->buildQuery();
 		$dbh = $this->connector->connect();
 		$sth = $dbh->prepare($this->getQuery());
+		print_r($this->getQuery());
 		$sth->execute();
 		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 		return $result;
