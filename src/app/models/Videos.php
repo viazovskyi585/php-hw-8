@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
-class Videos extends RootModel
+use Core\Orm\Select;
+
+class Videos
 {
 	public function getVideos()
 	{
-		$videos = $this->getDataFromDB("SELECT * FROM videos");
+		$select = new Select();
+		$select->setTableName("videos");
+		$videos = $select->execute();
 		return ['videos' => $videos];
 	}
 }

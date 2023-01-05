@@ -1,17 +1,31 @@
 <?php
 namespace App\Models;
+use Core\Orm\Select;
 
-class Admin extends RootModel
+class Admin
 {
-	public function getUsers()
+	public function getUsers(): array
 	{
-		$users = $this->getDataFromDB("SELECT id, email FROM users");
+		$select = new Select();
+		$select->setTableName("users");
+		$select->setFields(["id", "email"]);
+		$users = $select->execute();
 		return ['users' => $users];
 	}
 
-	public function getUser(string $id)
+	public function getUser(string $id): array
 	{
-		$user = $this->getDataFromDB("SELECT * FROM users WHERE id = $id");
+		$select = new Select();
+		$select->setTableName("users");
+		$select->setWhere([
+			[
+				"field" => "id",
+				"operator" => "=",
+				"value" => $id,
+			],
+		]);
+		$user = $select->execute();
+
 		return ['user' => $user];
 	}
 }
